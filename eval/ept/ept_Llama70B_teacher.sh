@@ -47,7 +47,7 @@ conda activate kd || true
 # -----------------------------------------------------
 # Run Benchmark
 # -----------------------------------------------------
-python run_ept_benchmark.py \
+python eval/ept/benchmark/run_ept_benchmark.py \
   --model "$MODEL" \
   --use-dolly \
   --num-prompts "$NUM_PROMPTS" \
