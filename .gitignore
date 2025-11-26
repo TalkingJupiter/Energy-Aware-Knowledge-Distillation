@@ -16,6 +16,7 @@ figures/
 csvconv.py
 plotter2.py
 *.out
+*.err
 kd_minmax_summary.py
 Archive/
 Base/base_ckpt/
