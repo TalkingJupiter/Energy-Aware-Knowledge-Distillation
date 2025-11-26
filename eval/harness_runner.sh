@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=kd_eval_harness_relation
+#SBATCH --job-name=kd_eval_harness
 #SBATCH --partition=h100
 #SBATCH --nodes=1
 #SBATCH --gpus-per-node=1
 #SBATCH --cpus-per-task=6
 #SBATCH --mem=32G
-#SBATCH --time=48:00:00
-#SBATCH --output=eval/student_runner/logs/relation/%x_%j.out
-#SBATCH --error=eval/student_runner/logs/relation/%x_%j.err
-#SBATCH --begin=now+48hour
+#SBATCH --time=60:00:00
+#SBATCH --output=eval/student_runner/logs/%x_%j.out
+#SBATCH --error=eval/student_runner/logs/%x_%j.err
+
 
 
 set -euo pipefail
@@ -39,6 +39,6 @@ lm_eval \
   "${EXTRA_FLAGS[@]}" \
   --tasks mmlu,hellaswag,bbh,arc_challenge \
   --batch_size auto \
-  --output_path "results/relation/${SLURM_JOB_ID}_harness_${RUN_NAME}_${TS}.json"
+  --output_path "results/${SLURM_JOB_ID}_harness_${RUN_NAME}_${TS}.json"
 
-echo "[INFO] Done -> results/relation/${SLURM_JOB_ID}_harness_${RUN_NAME}_${TS}.json"
+echo "[INFO] Done -> results/${SLURM_JOB_ID}_harness_${RUN_NAME}_${TS}.json"

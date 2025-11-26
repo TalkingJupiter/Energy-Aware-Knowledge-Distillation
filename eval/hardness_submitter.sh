@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=kd_eval_submitter_response
+#SBATCH --job-name=kd_eval_submitter
 #SBATCH --partition=zen4
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
@@ -22,8 +22,8 @@ PY
 # -------------------------------------------------------------------
 # Bases (Instruct variants; will use chat template flags)
 # -------------------------------------------------------------------
-# BASE_FEATURE="meta-llama/Llama-3.1-8B-Instruct"
-# BASE_RESPONSE="meta-llama/Llama-3.1-8B-Instruct"
+BASE_FEATURE="meta-llama/Llama-3.1-8B-Instruct"
+BASE_RESPONSE="meta-llama/Llama-3.1-8B-Instruct"
 BASE_RELATION="meta-llama/Llama-3.1-8B-Instruct"
 
 CHAT_FLAGS=( --apply_chat_template --fewshot_as_multiturn )
@@ -33,9 +33,9 @@ CHAT_FLAGS=( --apply_chat_template --fewshot_as_multiturn )
 # -------------------------------------------------------------------
 SER_ROOT="$(abspath serialization_dir)"
 
-# ADAPTERS_FEATURE=()
+ADAPTERS_FEATURE=()
 ADAPTERS_RELATION=()
-# ADAPTERS_RESPONSE=()
+ADAPTERS_RESPONSE=()
 
 if [[ -d "$SER_ROOT/feature" ]]; then
   # all immediate subdirs, sorted
@@ -82,6 +82,6 @@ submit_group () {
 # -------------------------------------------------------------------
 # Submit all groups
 # -------------------------------------------------------------------
-# submit_group "$BASE_FEATURE"  "${ADAPTERS_FEATURE[@]}"
-# submit_group "$BASE_RESPONSE" "${ADAPTERS_RESPONSE[@]}"
+submit_group "$BASE_FEATURE"  "${ADAPTERS_FEATURE[@]}"
+submit_group "$BASE_RESPONSE" "${ADAPTERS_RESPONSE[@]}"
 submit_group "$BASE_RELATION" "${ADAPTERS_RELATION[@]}"
